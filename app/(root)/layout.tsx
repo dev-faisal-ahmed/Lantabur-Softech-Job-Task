@@ -1,9 +1,9 @@
+import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
-import type { Metadata } from 'next';
+import { Navbar } from './_components/navbar';
 import '../globals.css';
-import { Navbar } from './_components/navbar/navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 

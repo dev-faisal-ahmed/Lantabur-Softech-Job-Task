@@ -5,12 +5,14 @@ import { ErrorResponse, SuccessResponse } from '@/utils/server-response';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { JWT_SECRET } from '@/config/config';
+import { connectDB } from '@/libs/connect-db';
 
 // request type
 type LoginRequestType = Omit<UserType, 'name'>;
 
 export async function POST(request: NextRequest) {
   try {
+    await connectDB();
     const loginInfo = (await request.json()) as LoginRequestType;
     // checking if user exist?
     const { email, password } = loginInfo;
@@ -25,7 +27,11 @@ export async function POST(request: NextRequest) {
     // cookies().set('email', body.email);
     if (!passwordMatched) throw new Error('Password does not match');
 
-    const token = jwt.sign(restUserInfo, JWT_SECRET!, { expiresIn: '60d' });
+    const token = jwt.sign(
+      { name: userInfo.name, email: userInfo.email },
+      JWT_SECRET!,
+      { expiresIn: '60d' },
+    );
     cookies().set('user', token);
 
     return NextResponse.json(

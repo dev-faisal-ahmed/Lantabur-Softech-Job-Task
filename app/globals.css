@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply min-h-screen bg-gray-100;
+  }
+}
+
 @layer components {
   .container {
     @apply mx-auto w-[95%] max-w-[1240px] xl:w-full;

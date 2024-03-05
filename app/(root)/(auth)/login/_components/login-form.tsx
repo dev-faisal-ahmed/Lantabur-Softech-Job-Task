@@ -46,7 +46,7 @@ export function LoginForm() {
   return (
     <form
       onSubmit={handleLogin}
-      className='flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
+      className='mx-auto mt-20 flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
     >
       <h1 className='text-center text-xl font-semibold text-blue-950'>
         Welcome Again, Login Here
