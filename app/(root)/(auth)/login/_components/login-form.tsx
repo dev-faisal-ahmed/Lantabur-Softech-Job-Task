@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/button";
-import { Input } from "@/components/input";
-import { serverAddress } from "@/utils/server-address";
-import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
+import { serverAddress } from '@/utils/server-address';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useState } from 'react';
 
 export function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -22,12 +22,12 @@ export function LoginForm() {
       setLoading(true);
       const url = `${serverAddress}/api/login`;
       const response = await fetch(url, {
-        method: "POST",
-        headers: { "Accept-Content": "Application/Json" },
+        method: 'POST',
+        headers: { 'Accept-Content': 'Application/Json' },
         body: JSON.stringify({ email }),
       });
       await response.json();
-      router.push("/");
+      router.push('/');
     } catch (err) {
       console.log(err);
     } finally {
@@ -36,8 +36,14 @@ export function LoginForm() {
   };
 
   return (
-    <form className="flex flex-col gap-5" onSubmit={handleLogin}>
-      <Input title="Input Email" name="email" placeholder="Input Your Email" type="email" required />
+    <form className='flex flex-col gap-5' onSubmit={handleLogin}>
+      <Input
+        title='Input Email'
+        name='email'
+        placeholder='Input Your Email'
+        type='email'
+        required
+      />
       {loading ? <p>Wait bro</p> : <Button>Submit</Button>}
       <p>Form Cookies : </p>
     </form>

@@ -1,19 +1,25 @@
 type InputProps = {
   title: string;
-  type: "text" | "email" | "password";
+  type: 'text' | 'email' | 'password';
   name: string;
   placeholder: string;
   required: boolean;
 };
 
-export function Input({ title, type, name, placeholder, required }: InputProps) {
+export function Input({
+  title,
+  type,
+  name,
+  placeholder,
+  required,
+}: InputProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label className="font-semibold" htmlFor={name}>
+    <div className='flex flex-col gap-2'>
+      <label className='font-semibold' htmlFor={name}>
         {title}
       </label>
       <input
-        className="border rounded-md py-2 px-5 outline-none focus:ring-2 ring-blue-500"
+        className='rounded-md border px-5 py-2 outline-none ring-blue-500 focus:ring-2'
         type={type}
         placeholder={placeholder}
         name={name}

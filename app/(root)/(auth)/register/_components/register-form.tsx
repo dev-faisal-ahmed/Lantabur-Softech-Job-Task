@@ -1,15 +1,17 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Button } from "@/components/button";
-import { Input } from "@/components/input";
-import { FormEvent, useState } from "react";
-import { toast } from "sonner";
-import { serverAddress } from "@/utils/server-address";
-import { serverRequest } from "@/utils/server-request";
+import Link from 'next/link';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
+import { FormEvent, useState } from 'react';
+import { toast } from 'sonner';
+import { serverAddress } from '@/utils/server-address';
+import { serverRequest } from '@/utils/server-request';
+import { useRouter } from 'next/navigation';
 
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,10 +28,16 @@ export function RegisterForm() {
     try {
       setLoading(true);
       const url = `${serverAddress}/api/register`;
-      const response = await fetch(url, serverRequest("POST", { name, email, password }));
+      const response = await fetch(
+        url,
+        serverRequest('POST', { name, email, password }),
+      );
       const data = await response.json();
 
       if (!data.ok) return toast.error(data.message);
+
+      toast.success(data.message);
+      router.push('/login');
     } catch (err) {
       toast.error(JSON.stringify(err));
     } finally {
@@ -38,25 +46,42 @@ export function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleRegister} className="flex flex-col gap-3 bg-white p-8 rounded-md shadow-md">
-      <h1 className="text-center font-semibold text-xl text-blue-950">Welcome, Register Here</h1>
+    <form
+      onSubmit={handleRegister}
+      className='flex flex-col gap-3 rounded-md bg-white p-8 shadow-md'
+    >
+      <h1 className='text-center text-xl font-semibold text-blue-950'>
+        Welcome, Register Here
+      </h1>
       <hr />
-      <Input title="Name" type="text" name="name" placeholder="Input Your Name" required />
-      <Input title="Email" type="email" name="email" placeholder="Input Your Email" required />
       <Input
-        title="Password"
-        type="password"
-        name="password"
-        placeholder="Input A Strong Password"
+        title='Name'
+        type='text'
+        name='name'
+        placeholder='Input Your Name'
+        required
+      />
+      <Input
+        title='Email'
+        type='email'
+        name='email'
+        placeholder='Input Your Email'
+        required
+      />
+      <Input
+        title='Password'
+        type='password'
+        name='password'
+        placeholder='Input A Strong Password'
         required
       />
 
-      <Button disabled={loading} className="mt-3">
+      <Button disabled={loading} className='mt-3'>
         Register
       </Button>
-      <p className="text-sm text-center mt-3">
-        Already have an account?{" "}
-        <Link className="underline text-blue-700" href={"/login"}>
+      <p className='mt-3 text-center text-sm'>
+        Already have an account?{' '}
+        <Link className='text-blue-700 underline' href={'/login'}>
           Login
         </Link>
       </p>

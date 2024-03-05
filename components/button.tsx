@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type ButtonProps = {
   children: ReactNode;
@@ -11,8 +11,8 @@ export function Button({ children, className, disabled }: ButtonProps) {
   return (
     <button
       className={twMerge(
-        "bg-blue-500 px-5 py-2 rounded-md text-white disabled:bg-gray-400 disabled:text-black",
-        className
+        'rounded-md bg-blue-500 px-5 py-2 text-white disabled:bg-gray-400 disabled:text-black',
+        className,
       )}
       disabled={disabled}
     >
