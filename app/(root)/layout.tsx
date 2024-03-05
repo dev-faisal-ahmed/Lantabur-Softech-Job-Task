@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { Navbar } from './_components/navbar';
 import '../globals.css';
+import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,10 +18,12 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const token = cookies().get('user');
+
   return (
     <html lang='en'>
       <body className={`${inter.className}`}>
-        <Navbar />
+        <Navbar token={token?.value!} />
         {children}
         <Toaster richColors />
       </body>

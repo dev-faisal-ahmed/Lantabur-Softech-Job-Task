@@ -8,8 +8,9 @@ import { Button } from '@/components/button';
 
 const font = Contrail_One({ subsets: ['latin'], weight: ['400'] });
 
-export function Navbar() {
+export function Navbar({ token }: { token: string }) {
   const activeUrl = usePathname();
+
   return (
     <nav className='bg-white py-5'>
       <div className='container flex items-center justify-between'>
@@ -27,9 +28,13 @@ export function Navbar() {
             Profile
           </NavLink>
         </div>
-        <Link href={'/login'}>
-          <Button>Login</Button>
-        </Link>
+        {token ? (
+          <Button className='bg-red-500'>LogOut</Button>
+        ) : (
+          <Link href={'/login'}>
+            <Button>Login</Button>
+          </Link>
+        )}
       </div>
     </nav>
   );
