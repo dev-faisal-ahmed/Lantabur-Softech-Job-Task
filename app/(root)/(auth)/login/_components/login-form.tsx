@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { serverAddress } from '@/utils/server-address';
 import { serverRequest } from '@/utils/server-request';
 import { useRouter } from 'next/navigation';
+import { Loader } from '@/components/loader';
 
 export function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,7 @@ export function LoginForm() {
 
       toast.success(data.message);
       router.push('/');
+      router.refresh();
     } catch (err) {
       toast.error(JSON.stringify(err));
     } finally {
@@ -44,39 +46,42 @@ export function LoginForm() {
   };
 
   return (
-    <form
-      onSubmit={handleLogin}
-      className='mx-auto mt-20 flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
-    >
-      <h1 className='text-center text-xl font-semibold text-blue-950'>
-        Welcome Again, Login Here
-      </h1>
-      <hr />
-      <div />
-      <Input
-        title='Email'
-        type='email'
-        name='email'
-        placeholder='Input Your Email'
-        required
-      />
-      <Input
-        title='Password'
-        type='password'
-        name='password'
-        placeholder='Input A Strong Password'
-        required
-      />
+    <>
+      {loading && <Loader />}
+      <form
+        onSubmit={handleLogin}
+        className='mx-auto mt-20 flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
+      >
+        <h1 className='text-center text-xl font-semibold text-blue-950'>
+          Welcome Again, Login Here
+        </h1>
+        <hr />
+        <div />
+        <Input
+          title='Email'
+          type='email'
+          name='email'
+          placeholder='Input Your Email'
+          required
+        />
+        <Input
+          title='Password'
+          type='password'
+          name='password'
+          placeholder='Input A Strong Password'
+          required
+        />
 
-      <Button disabled={loading} className='mt-3'>
-        Login
-      </Button>
-      <p className='mt-3 text-center text-sm'>
-        New here?{' '}
-        <Link className='text-blue-700 underline' href={'/register'}>
-          Register
-        </Link>
-      </p>
-    </form>
+        <Button disabled={loading} className='mt-3'>
+          Login
+        </Button>
+        <p className='mt-3 text-center text-sm'>
+          New here?{' '}
+          <Link className='text-blue-700 underline' href={'/register'}>
+            Register
+          </Link>
+        </p>
+      </form>
+    </>
   );
 }

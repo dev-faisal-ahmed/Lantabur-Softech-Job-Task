@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { serverAddress } from '@/utils/server-address';
 import { serverRequest } from '@/utils/server-request';
 import { useRouter } from 'next/navigation';
+import { Loader } from '@/components/loader';
 
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
@@ -46,46 +47,49 @@ export function RegisterForm() {
   };
 
   return (
-    <form
-      onSubmit={handleRegister}
-      className='flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
-    >
-      <h1 className='text-center text-xl font-semibold text-blue-950'>
-        Welcome, Register Here
-      </h1>
-      <hr />
-      <div />
-      <Input
-        title='Name'
-        type='text'
-        name='name'
-        placeholder='Input Your Name'
-        required
-      />
-      <Input
-        title='Email'
-        type='email'
-        name='email'
-        placeholder='Input Your Email'
-        required
-      />
-      <Input
-        title='Password'
-        type='password'
-        name='password'
-        placeholder='Input A Strong Password'
-        required
-      />
+    <>
+      {loading && <Loader />}
+      <form
+        onSubmit={handleRegister}
+        className='flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
+      >
+        <h1 className='text-center text-xl font-semibold text-blue-950'>
+          Welcome, Register Here
+        </h1>
+        <hr />
+        <div />
+        <Input
+          title='Name'
+          type='text'
+          name='name'
+          placeholder='Input Your Name'
+          required
+        />
+        <Input
+          title='Email'
+          type='email'
+          name='email'
+          placeholder='Input Your Email'
+          required
+        />
+        <Input
+          title='Password'
+          type='password'
+          name='password'
+          placeholder='Input A Strong Password'
+          required
+        />
 
-      <Button disabled={loading} className='mt-3'>
-        Register
-      </Button>
-      <p className='mt-3 text-center text-sm'>
-        Already have an account?{' '}
-        <Link className='text-blue-700 underline' href={'/login'}>
-          Login
-        </Link>
-      </p>
-    </form>
+        <Button disabled={loading} className='mt-3'>
+          Register
+        </Button>
+        <p className='mt-3 text-center text-sm'>
+          Already have an account?{' '}
+          <Link className='text-blue-700 underline' href={'/login'}>
+            Login
+          </Link>
+        </p>
+      </form>
+    </>
   );
 }
