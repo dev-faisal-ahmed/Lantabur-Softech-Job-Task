@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
+import { MONGODB_URI } from '@/config/config';
 
 declare global {
   var mongoose: any; // This must be a `var` and not a `let / const`
 }
-
-const MONGODB_URI = process.env.MONGODB_URI!;
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -26,7 +25,7 @@ export async function connectDB() {
     const opts = {
       bufferCommands: false,
     };
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
       console.log('connected');
       return mongoose;
     });
