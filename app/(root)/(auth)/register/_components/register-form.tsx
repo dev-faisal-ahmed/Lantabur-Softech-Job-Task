@@ -48,12 +48,13 @@ export function RegisterForm() {
   return (
     <form
       onSubmit={handleRegister}
-      className='flex flex-col gap-3 rounded-md bg-white p-8 shadow-md'
+      className='flex w-full max-w-[450px] flex-col gap-3 rounded-lg bg-white p-8 shadow-md'
     >
       <h1 className='text-center text-xl font-semibold text-blue-950'>
         Welcome, Register Here
       </h1>
       <hr />
+      <div />
       <Input
         title='Name'
         type='text'

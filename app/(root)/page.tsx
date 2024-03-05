@@ -1,8 +1,4 @@
-import { cookies } from 'next/headers';
-
-export default function Home() {
-  const cookieStore = cookies();
-  console.log(cookieStore.get('email'), 'my cookies');
+export default function HomePage() {
   return (
     <main>
       <h1>Hi Test APP</h1>
